@@ -1,0 +1,174 @@
+<head>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+    />
+    <link rel="stylesheet" href="/CSS/indexCategorias.css" />
+</head>
+<%- include('../partials/header') %>
+<%- include('../partials/nav') %>
+
+<div class="categorias-container">
+
+    <!-- Cabeçalho da página -->
+    <div class="categorias-topo">
+
+        <div class="categorias-titulo">
+            <div class="categorias-icon">
+                <i class="bi bi-tags"></i>
+            </div>
+
+            <div>
+                <h2>Categorias</h2>
+                <p>Gerencie e organize as categorias dos seus eletrônicos</p>
+            </div>
+        </div>
+
+        <a href="/categorias/cadastro" class="btn-nova-categoria">
+            <i class="bi bi-plus-lg"></i>
+            Nova Categoria
+        </a>
+
+    </div>
+
+    <!-- Card da tabela -->
+    <div class="categorias-card">
+
+        <div class="categorias-card-header">
+
+            <div>
+                <h5>Lista de categorias</h5>
+                <p>Confira todas as categorias cadastradas no sistema.</p>
+            </div>
+
+            <span class="categorias-badge">
+                <i class="bi bi-folder2-open"></i>
+                <%= categorias.length %> categorias
+            </span>
+
+        </div>
+
+        <div class="categorias-table-container">
+
+            <table class="categorias-table">
+
+                <thead>
+                    <tr>
+                        <th class="col-id">ID</th>
+                        <th>Nome</th>
+                        <th>Descrição</th>
+                        <th class="col-acoes">Opções</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+
+                    <% if (categorias.length > 0) { %>
+
+                        <% categorias.forEach(mostrar => { %>
+
+                            <tr>
+
+                                <td>
+                                    <span class="categoria-id">
+                                        #<%= mostrar.id %>
+                                    </span>
+                                </td>
+
+                                <td>
+                                    <div class="categoria-nome">
+                                        <div class="categoria-nome-icon">
+                                            <i class="bi bi-folder"></i>
+                                        </div>
+
+                                        <span>
+                                            <%= mostrar.nome %>
+                                        </span>
+                                    </div>
+                                </td>
+
+                                <td>
+                                    <span class="categoria-descricao">
+                                        <%= mostrar.descricao || "Sem descrição" %>
+                                    </span>
+                                </td>
+
+                                <td>
+                                    <div class="categoria-opcoes">
+
+                                        <a
+                                            href="/categorias/editar/<%= mostrar.id %>"
+                                            class="btn-editar"
+                                            title="Editar categoria"
+                                        >
+                                            <i class="bi bi-pencil-square"></i>
+                                            Editar
+                                        </a>
+
+                                        <a
+                                            href="/categorias/excluir/<%= mostrar.id %>"
+                                            class="btn-excluir"
+                                            title="Excluir categoria"
+                                            onclick="return confirm('Deseja realmente excluir essa categoria?')"
+                                        >
+                                            <i class="bi bi-trash3"></i>
+                                            Excluir
+                                        </a>
+
+                                    </div>
+                                </td>
+
+                            </tr>
+
+                        <% }) %>
+
+                    <% } else { %>
+
+                        <tr>
+                            <td colspan="4">
+
+                                <div class="categorias-vazio">
+
+                                    <i class="bi bi-folder-x"></i>
+
+                                    <h5>Nenhuma categoria cadastrada</h5>
+
+                                    <p>
+                                        Comece cadastrando uma nova categoria
+                                        para organizar seus eletrônicos.
+                                    </p>
+
+                                    <a href="/categorias/cadastro"
+                                       class="btn-nova-categoria">
+                                        <i class="bi bi-plus-lg"></i>
+                                        Cadastrar categoria
+                                    </a>
+
+                                </div>
+
+                            </td>
+                        </tr>
+
+                    <% } %>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+        <!-- Rodapé do card -->
+        <div class="categorias-card-footer">
+
+            <span>
+                <i class="bi bi-info-circle"></i>
+                Gerencie suas categorias por meio das opções disponíveis.
+            </span>
+
+        </div>
+
+    </div>
+
+</div>
+
+<%- include('../partials/footer') %>
