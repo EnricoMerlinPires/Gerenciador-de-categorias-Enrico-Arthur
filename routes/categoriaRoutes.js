@@ -25,7 +25,7 @@ let categorias = [
 ];
 
 router.get("/", (req, res) => {
-  res.render("Categorias/index", {
+  res.render("categorias/index", {
     categorias: categorias
   });
 })
